@@ -33,7 +33,7 @@ export default function CalendarGrid({
     if (dayInfo.isToday) classes.push(styles.today);
 
     const isStart = startDate && isSameDay(dayInfo.date, startDate);
-    const isEnd = effectiveEnd && isSameDay(dayInfo.date, effectiveEnd);
+    const isEnd = startDate && effectiveEnd && isSameDay(dayInfo.date, effectiveEnd);
     const inRange = startDate && effectiveEnd && isDateInRange(dayInfo.date, startDate, effectiveEnd);
 
     if (isStart) classes.push(styles.rangeStart);

@@ -25,6 +25,17 @@ const CircularBinding = ({
 
 const PairGroup = ({ xOffset, radius, thickness, groupX, idx }) => (
   <group position={[-groupX, 0, 0]}>
+    {/* Square Hole Left */}
+    <mesh position={[-xOffset, -0.07, 0.001]}>
+      <planeGeometry args={[0.045, 0.054]} />
+      <meshBasicMaterial color="white" />
+    </mesh>
+    {/* Square Hole Right */}
+    <mesh position={[xOffset, -0.07, 0.001]}>
+      <planeGeometry args={[0.045, 0.054]} />
+      <meshBasicMaterial color="white" />
+    </mesh>
+
     <CircularBinding
       radius={radius}
       thickness={thickness}
