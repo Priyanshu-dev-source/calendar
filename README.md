@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📅 Interactive Wall Calendar Component
 
-## Getting Started
+A polished, interactive Next.js calendar component inspired by physical wall calendars. Built as a frontend engineering challenge submission.
 
-First, run the development server:
+## ✨ Features
+
+### Core Features
+- **Wall Calendar Aesthetic** — Hero images with diagonal wave overlays, spiral binding, and clean grid layout
+- **Day Range Selector** — Click to select start/end dates with clear visual states (start circle, end circle, highlighted range)
+- **Integrated Notes** — Per-month and per-date-range notes with localStorage persistence
+- **Fully Responsive** — Desktop (side-by-side panels) and mobile (stacked vertical layout)
+
+### Creative Extras
+- 🎞️ **Page Flip Animation** — 3D CSS flip transition when navigating months
+- 🖼️ **Month-Themed Images** — Unique hero image and accent color per month
+- 🎉 **Holiday Markers** — Indian national + international holidays with emoji indicators
+- 🌙 **Dark Mode** — Theme toggle with smooth transitions
+- ⌨️ **Keyboard Navigation** — Arrow keys for months, Escape to clear selection
+- 🖨️ **Print Styles** — Clean printing with CSS `@media print`
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- npm
+
+### Installation
+
+```bash
+git clone <repo-url>
+cd tuf
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 🏗️ Architecture
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+├── layout.js          — Root layout with fonts & metadata
+├── page.js            — Main page rendering Calendar
+└── globals.css        — Design tokens, dark mode, resets
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+components/
+├── Calendar/
+│   ├── Calendar.js         — Main orchestrator
+│   ├── CalendarHeader.js   — Hero image + month navigation
+│   ├── CalendarGrid.js     — Date grid with range selection
+│   └── NotesPanel.js       — Notes + holidays sidebar
+└── SpiralBinding/
+    └── SpiralBinding.js    — Decorative spiral binding
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+hooks/
+├── useCalendar.js          — Month/year navigation state
+├── useRangeSelection.js    — Date range selection logic
+└── useNotes.js             — Notes CRUD with localStorage
 
-## Deploy on Vercel
+utils/
+├── dateUtils.js            — Date helpers & grid generation
+└── holidays.js             — Holiday data
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+data/
+└── monthImages.js          — Per-month image & color config
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 Design Decisions
+
+1. **CSS Modules** — Scoped styling without global conflicts
+2. **Custom Hooks** — Clean separation of concerns (calendar, selection, notes)
+3. **No External UI Libraries** — Pure React + CSS implementation
+4. **localStorage** — Client-side persistence for notes (no backend needed)
+5. **Monday-first Week** — Following the reference image's European calendar convention
+
+## 🛠️ Tech Stack
+
+- **Next.js 16** (App Router)
+- **React 19**
+- **Vanilla CSS** (CSS Modules)
+- **next/font** (Google Fonts - Geist)
+
+## 📱 Responsive Breakpoints
+
+| Viewport | Layout |
+|----------|--------|
+| Desktop (>768px) | Side-by-side: Notes left, Grid right |
+| Mobile (≤768px) | Stacked: Image → Notes → Grid |
+
+## ⌨️ Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `←` | Previous month |
+| `→` | Next month |
+| `Esc` | Clear date selection |
