@@ -98,11 +98,3 @@ data/
 |----------|--------|
 | Desktop (>768px) | Side-by-side: Notes left, Grid right |
 | Mobile (≤768px) | Stacked: Image → Notes → Grid |
-
-## ⌨ Keyboard Shortcuts
-
-| Key | Action |
-|-----|--------|
-| `←` | Previous month |
-| `→` | Next month |
-| `Esc` | Clear date selection |
