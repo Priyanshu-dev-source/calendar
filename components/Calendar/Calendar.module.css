@@ -22,6 +22,7 @@
     0 0 0 1px rgba(0, 0, 0, 0.04);
   overflow: visible;
   position: relative;
+  /* background-color: white; */
 }
 
 .spiralBindingWrapper {
@@ -190,7 +191,7 @@
 .calendarPageContent {
   width: 100%;
   height: 100%;
-  background: #fff;
+  background-color: white;
   border-radius: 4px;
 }
 

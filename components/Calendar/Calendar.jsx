@@ -212,15 +212,6 @@ export default function Calendar() {
           </button>
         </div>
       </div>
-
-      <button
-        className={styles.themeToggle}
-        onClick={toggleTheme}
-        aria-label="Toggle dark mode"
-        id="btn-theme-toggle"
-      >
-        {isDark ? '☀️' : '🌙'}
-      </button>
     </div>
   );
 }
