@@ -2,9 +2,6 @@
 
 import { useState, useCallback } from 'react';
 
-/**
- * Hook to manage current month/year navigation
- */
 export function useCalendar() {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());

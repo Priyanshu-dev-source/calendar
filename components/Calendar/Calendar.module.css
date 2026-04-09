@@ -14,7 +14,7 @@
 .calendar {
   width: 100%;
   max-width: 700px;
-  background: #fff;
+  background: transparent;
   border-radius: 4px;
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.12),
@@ -24,16 +24,18 @@
   position: relative;
 }
 
-/* Spiral binding wrapper — overlaps the top of the hero image */
 .spiralBindingWrapper {
-  position: relative;
+  position: absolute;
+  top: -24px;
+  left: 0;
+  width: 100%;
   z-index: 20;
-  margin-bottom: -24px; /* pull the image up so rings overlap its top */
   pointer-events: none;
 }
 
 .calendarBody {
   display: flex;
+  background-color: white;
 }
 
 .gridSection {
@@ -47,13 +49,11 @@
   flex-shrink: 0;
 }
 
-/* Shadow at the fold between image and grid */
 .foldShadow {
   height: 4px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.08), transparent);
 }
 
-/* Keyboard hint */
 .keyboardHint {
   text-align: center;
   padding: 8px;
@@ -73,7 +73,6 @@
   margin: 0 2px;
 }
 
-/* Dark mode toggle */
 .themeToggle {
   position: fixed;
   bottom: 20px;
@@ -98,7 +97,7 @@
   box-shadow: 0 6px 24px rgba(0,0,0,0.2);
 }
 
-/* Dark mode */
+
 :global([data-theme="dark"]) .calendarWrapper {
   background: #1a1a2e;
   background-image: 
@@ -107,16 +106,13 @@
 }
 
 :global([data-theme="dark"]) .calendar {
-  background: #16213e;
+  background: transparent;
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.4),
     0 8px 20px rgba(0, 0, 0, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
-:global([data-theme="dark"]) .notesSection {
-  border-left-color: #2a2a4a;
-}
 
 
 :global([data-theme="dark"]) .themeToggle {
@@ -145,11 +141,151 @@
     border-top: 1px solid #eee;
   }
   
-  :global([data-theme="dark"]) .notesSection {
-    border-top-color: #2a2a4a;
-  }
   
   .keyboardHint {
     display: none;
   }
 }
+
+/* ============================================
+   Navigation & Flip Animation 
+   ============================================ */
+
+.navigation {
+  position: absolute;
+  top: 170px; /* middle of 380px header minus some offset */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.navBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  color: #333;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.navBtn:hover {
+  background: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.calendarPageContent {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.pageUnderneath {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.flipPage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  transform-origin: top left;
+  transition: none;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.flipShadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 6;
+  background: linear-gradient(
+    to bottom left,
+    transparent 40%,
+    rgba(0, 0, 0, 0.03) 55%,
+    rgba(0, 0, 0, 0.12) 75%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+  transition: opacity 0.2s ease;
+}
+
+.flipPageNext {
+  animation: pageFlipNext 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.flipPageNext .flipShadow {
+  animation: shadowFadeIn 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes pageFlipNext {
+  0% { transform: perspective(2000px) rotateY(0deg) rotateX(0deg); transform-origin: left top; opacity: 1; }
+  15% { transform: perspective(2000px) rotateY(0deg) rotateX(0deg) scale(0.99); transform-origin: left top; opacity: 1; }
+  40% { transform: perspective(2000px) rotateY(-25deg) rotateX(5deg) skewY(-2deg); transform-origin: left top; opacity: 1; }
+  70% { transform: perspective(2000px) rotateY(-70deg) rotateX(8deg) skewY(-4deg); transform-origin: left top; opacity: 0.9; }
+  100% { transform: perspective(2000px) rotateY(-120deg) rotateX(10deg) skewY(-5deg); transform-origin: left top; opacity: 0; }
+}
+
+@keyframes shadowFadeIn {
+  0% { opacity: 0; }
+  30% { opacity: 0.3; }
+  60% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.flipPagePrev {
+  animation: pageFlipPrev 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.flipPagePrev .flipShadow {
+  animation: shadowFadeOut 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes pageFlipPrev {
+  0% { transform: perspective(2000px) rotateY(120deg) rotateX(10deg) skewY(5deg); transform-origin: right top; opacity: 0; }
+  30% { transform: perspective(2000px) rotateY(70deg) rotateX(8deg) skewY(4deg); transform-origin: right top; opacity: 0.8; }
+  60% { transform: perspective(2000px) rotateY(25deg) rotateX(3deg) skewY(1deg); transform-origin: right top; opacity: 1; }
+  85% { transform: perspective(2000px) rotateY(5deg) rotateX(0deg) skewY(0deg); transform-origin: right top; opacity: 1; }
+  100% { transform: perspective(2000px) rotateY(0deg) rotateX(0deg) skewY(0deg) scale(1); transform-origin: right top; opacity: 1; }
+}
+
+@keyframes shadowFadeOut {
+  0% { opacity: 1; }
+  40% { opacity: 0.5; }
+  100% { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .navBtn {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+  }
+  .navigation {
+    top: 110px;
+  }
+}
+

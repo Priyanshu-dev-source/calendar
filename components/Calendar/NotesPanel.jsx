@@ -22,7 +22,6 @@ export default function NotesPanel({
   const monthKey = getMonthKey(year, month);
   const rangeKey = startDate ? getRangeKey(startDate, endDate) : null;
 
-  // Active note: if a range is selected, show range notes; otherwise show month notes
   const activeKey = rangeKey || monthKey;
   const noteValue = getNote(activeKey);
 
@@ -48,11 +47,10 @@ export default function NotesPanel({
   return (
     <div className={styles.panel} style={cssVars}>
       <div className={styles.header}>
-        {/* <span className={styles.pencilIcon}>✏️</span> */}
         <span className={styles.title}>Notes</span>
       </div>
 
-      {/* Context label */}
+   
       {startDate ? (
         <>
           <div className={styles.noteLabel}>Selected Range</div>
@@ -77,23 +75,6 @@ export default function NotesPanel({
       <div className={`${styles.savedIndicator} ${showSaved ? styles.visible : ''}`}>
         ✓ Saved
       </div>
-
-      {/* Monthly holidays */}
-      {/* {monthHolidays.length > 0 && (
-        <>
-          <div className={styles.divider} />
-          <div className={styles.holidaysList}>
-            <div className={styles.holidaysTitle}>Holidays</div>
-            {monthHolidays.map((h) => (
-              <div key={h.day} className={styles.holidayItem}>
-                <span className={styles.holidayDay}>{h.day}</span>
-                <span className={styles.holidayEmoji}>{h.emoji}</span>
-                <span>{h.name}</span>
-              </div>
-            ))}
-          </div>
-        </>
-      )} */}
     </div>
   );
 }

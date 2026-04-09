@@ -1,59 +1,8 @@
-// import styles from './SpiralBinding.module.css';
-
-// export default function SpiralBinding() {
-//   const coilCount = 28;
-
-//   return (
-//     <div className={styles.bindingArea}>
-//       {/* Wall hook/hanger */}
-//       <div className={styles.hookContainer}>
-//         <div className={styles.hookNail} />
-//         <div className={styles.hookWire}>
-//           <svg viewBox="0 0 60 40" className={styles.hookSvg}>
-//             {/* Hook wire arc */}
-//             <path
-//               d="M5,38 Q5,5 30,5 Q55,5 55,38"
-//               stroke="#333"
-//               strokeWidth="3"
-//               fill="none"
-//               strokeLinecap="round"
-//             />
-//           </svg>
-//         </div>
-//       </div>
-
-//       {/* Spiral coils spanning full width */}
-//       <div className={styles.spiralRow}>
-//         {Array.from({ length: coilCount }, (_, i) => (
-//           <div key={i} className={styles.coil}>
-//             <svg viewBox="0 0 16 22" className={styles.coilSvg}>
-//               <path
-//                 d="M3,22 L3,6 C3,2.5 5,0.5 8,0.5 C11,0.5 13,2.5 13,6 L13,22"
-//                 stroke="#444"
-//                 strokeWidth="2"
-//                 fill="none"
-//                 strokeLinecap="round"
-//               />
-//             </svg>
-//           </div>
-//         ))}
-//       </div>
-
-//       {/* Shadow line below spirals */}
-//       <div className={styles.spiralShadow} />
-//     </div>
-//   );
-// }
-
-
 import React, { useMemo } from "react";
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { OrthographicCamera } from "@react-three/drei";
 
-// Invisible occluder material — writes to depth buffer only, renders no color.
-// This hides the back part of the rings (bottom arcs going behind the page)
-// while remaining completely invisible itself.
 const occluderMaterial = new THREE.MeshBasicMaterial({
   colorWrite: false,
   side: THREE.DoubleSide,
@@ -76,7 +25,6 @@ const CircularBinding = ({
 
 const PairGroup = ({ xOffset, radius, thickness, groupX, idx }) => (
   <group position={[-groupX, 0, 0]}>
-    {/* The Rings */}
     <CircularBinding
       radius={radius}
       thickness={thickness}
@@ -115,20 +63,19 @@ export default function App() {
         <pointLight position={[5, 5, 5]} intensity={2} />
         <pointLight position={[-5, -5, 5]} intensity={1} />
 
-        {/* Invisible occluder strip — hides the back arcs of the rings */}
-        {/* Positioned at z=0 so it sits between the front and back faces of the torus */}
+
         <mesh position={[0, -(radius * 0.55), 0]} material={occluderMaterial}>
           <planeGeometry args={[planeWidth + 0.5, radius * 1.2]} />
         </mesh>
 
-        {/* The Rings mapped with center gap and tilt */}
+  
         {[...groups].reverse().map((posX, index) => {
           const centerIndex = (groups.length - 1) / 2;
 
-          // Calculate how far this item is from the exact center
+       
           const distanceFromCenter = Math.abs(index - centerIndex);
 
-          // Remove the 4 innermost rings to create the gap
+
           if (distanceFromCenter < 1.5) {
             return null; 
           }

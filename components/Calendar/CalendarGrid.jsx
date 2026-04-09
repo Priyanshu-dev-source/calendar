@@ -51,7 +51,6 @@ export default function CalendarGrid({
 
   return (
     <div className={styles.gridContainer} style={cssVars}>
-      {/* Day name headers */}
       <div className={styles.dayNames}>
         {DAY_NAMES.map((name, i) => (
           <div
@@ -63,7 +62,6 @@ export default function CalendarGrid({
         ))}
       </div>
 
-      {/* Date grid */}
       <div className={styles.grid}>
         {grid.map((dayInfo, i) => {
           const holiday = dayInfo.isCurrentMonth ? getHoliday(dayInfo.date) : null;
@@ -94,7 +92,6 @@ export default function CalendarGrid({
         })}
       </div>
 
-      {/* Selection info */}
       {startDate && (
         <div className={styles.selectionInfo}>
           <span className={styles.selectionRange}>

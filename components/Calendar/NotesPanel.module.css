@@ -3,6 +3,7 @@
   flex-direction: column;
   padding: 16px 20px 12px;
   min-width: 200px;
+  background-color: white;
 }
 
 .header {
@@ -17,7 +18,7 @@
   font-weight: 700;
   color: #333;
   letter-spacing: 0.5px;
-  font-style: italic;
+  /* font-style: italic; */
 }
 
 .pencilIcon {
@@ -96,7 +97,7 @@
   margin: 12px 0;
 }
 
-/* Holidays list for the month */
+
 .holidaysList {
   margin-top: 8px;
 }

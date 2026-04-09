@@ -1,8 +1,8 @@
-# 📅 Interactive Wall Calendar Component
+# Interactive Wall Calendar Component
 
 A polished, interactive Next.js calendar component inspired by physical wall calendars. Built as a frontend engineering challenge submission.
 
-## ✨ Features
+## Features
 
 ### Core Features
 - **Wall Calendar Aesthetic** — Hero images with diagonal wave overlays, spiral binding, and clean grid layout
@@ -11,14 +11,14 @@ A polished, interactive Next.js calendar component inspired by physical wall cal
 - **Fully Responsive** — Desktop (side-by-side panels) and mobile (stacked vertical layout)
 
 ### Creative Extras
-- 🎞️ **Page Flip Animation** — 3D CSS flip transition when navigating months
-- 🖼️ **Month-Themed Images** — Unique hero image and accent color per month
-- 🎉 **Holiday Markers** — Indian national + international holidays with emoji indicators
-- 🌙 **Dark Mode** — Theme toggle with smooth transitions
-- ⌨️ **Keyboard Navigation** — Arrow keys for months, Escape to clear selection
-- 🖨️ **Print Styles** — Clean printing with CSS `@media print`
+- **Page Flip Animation** — 3D CSS flip transition when navigating months
+-  **Month-Themed Images** — Unique hero image and accent color per month
+-  **Holiday Markers** — Indian national + international holidays with emoji indicators
+-  **Dark Mode** — Theme toggle with smooth transitions
+-  **Keyboard Navigation** — Arrow keys for months, Escape to clear selection
+-  **Print Styles** — Clean printing with CSS `@media print`
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js 18+ 
@@ -47,7 +47,7 @@ npm run build
 npm start
 ```
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 app/
@@ -77,7 +77,7 @@ data/
 └── monthImages.js          — Per-month image & color config
 ```
 
-## 🎨 Design Decisions
+##  Design Decisions
 
 1. **CSS Modules** — Scoped styling without global conflicts
 2. **Custom Hooks** — Clean separation of concerns (calendar, selection, notes)
@@ -85,21 +85,21 @@ data/
 4. **localStorage** — Client-side persistence for notes (no backend needed)
 5. **Monday-first Week** — Following the reference image's European calendar convention
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Next.js 16** (App Router)
 - **React 19**
 - **Vanilla CSS** (CSS Modules)
 - **next/font** (Google Fonts - Geist)
 
-## 📱 Responsive Breakpoints
+##  Responsive Breakpoints
 
 | Viewport | Layout |
 |----------|--------|
 | Desktop (>768px) | Side-by-side: Notes left, Grid right |
 | Mobile (≤768px) | Stacked: Image → Notes → Grid |
 
-## ⌨️ Keyboard Shortcuts
+## ⌨ Keyboard Shortcuts
 
 | Key | Action |
 |-----|--------|

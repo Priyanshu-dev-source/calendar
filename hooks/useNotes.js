@@ -5,15 +5,11 @@ import { formatDateKey } from '@/utils/dateUtils';
 
 const STORAGE_KEY = 'calendar-notes';
 
-/**
- * Hook to manage notes with localStorage persistence
- * Notes can be per-month or per-date-range
- */
+
 export function useNotes() {
   const [notes, setNotes] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load notes from localStorage on mount
   useEffect(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
@@ -26,7 +22,7 @@ export function useNotes() {
     setIsLoaded(true);
   }, []);
 
-  // Save notes to localStorage whenever they change
+
   useEffect(() => {
     if (isLoaded) {
       try {
@@ -37,16 +33,12 @@ export function useNotes() {
     }
   }, [notes, isLoaded]);
 
-  /**
-   * Get note for a specific key (month key or date range key)
-   */
+ 
   const getNote = useCallback((key) => {
     return notes[key] || '';
   }, [notes]);
 
-  /**
-   * Set note for a specific key
-   */
+
   const setNote = useCallback((key, text) => {
     setNotes((prev) => ({
       ...prev,
@@ -54,16 +46,11 @@ export function useNotes() {
     }));
   }, []);
 
-  /**
-   * Generate a key for a month
-   */
+
   const getMonthKey = useCallback((year, month) => {
     return `month-${year}-${month}`;
   }, []);
 
-  /**
-   * Generate a key for a date range
-   */
   const getRangeKey = useCallback((startDate, endDate) => {
     if (!startDate) return null;
     const startKey = formatDateKey(startDate);
