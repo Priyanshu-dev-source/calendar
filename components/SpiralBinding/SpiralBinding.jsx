@@ -23,18 +23,39 @@ const CircularBinding = ({
   );
 };
 
+const PunchedHole = ({ position }) => (
+  <group position={position}>
+    <mesh>
+      <planeGeometry args={[0.045, 0.054]} />
+      <meshBasicMaterial color="#e6e6e6" />
+    </mesh>
+    {/* Top inner shadow layers */}
+    <mesh position={[0, 0.024, 0.0001]}>
+      <planeGeometry args={[0.045, 0.006]} />
+      <meshBasicMaterial color="#000000" transparent opacity={0.4} />
+    </mesh>
+    <mesh position={[0, 0.018, 0.0001]}>
+      <planeGeometry args={[0.045, 0.006]} />
+      <meshBasicMaterial color="#000000" transparent opacity={0.15} />
+    </mesh>
+    {/* Left inner shadow layers */}
+    <mesh position={[-0.0195, 0, 0.0001]}>
+      <planeGeometry args={[0.006, 0.054]} />
+      <meshBasicMaterial color="#000000" transparent opacity={0.25} />
+    </mesh>
+    <mesh position={[-0.0145, 0, 0.0001]}>
+      <planeGeometry args={[0.004, 0.054]} />
+      <meshBasicMaterial color="#000000" transparent opacity={0.1} />
+    </mesh>
+  </group>
+);
+
 const PairGroup = ({ xOffset, radius, thickness, groupX, idx }) => (
   <group position={[-groupX, 0, 0]}>
-    {/* Square Hole Left */}
-    <mesh position={[-xOffset, -0.07, 0.001]}>
-      <planeGeometry args={[0.045, 0.054]} />
-      <meshBasicMaterial color="white" />
-    </mesh>
-    {/* Square Hole Right */}
-    <mesh position={[xOffset, -0.07, 0.001]}>
-      <planeGeometry args={[0.045, 0.054]} />
-      <meshBasicMaterial color="white" />
-    </mesh>
+    {/* 3D-like Square Hole Left */}
+    <PunchedHole position={[-xOffset, -0.07, 0.001]} />
+    {/* 3D-like Square Hole Right */}
+    <PunchedHole position={[xOffset, -0.07, 0.001]} />
 
     <CircularBinding
       radius={radius}
