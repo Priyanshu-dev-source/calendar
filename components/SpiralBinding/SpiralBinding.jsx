@@ -40,6 +40,32 @@ const PairGroup = ({ xOffset, radius, thickness, groupX, idx }) => (
   </group>
 );
 
+const HangerHook = ({ thickness = 0.004, color = "#333333" }) => {
+  const curve = useMemo(() => {
+    return new THREE.CatmullRomCurve3(
+      [
+        new THREE.Vector3(-0.60, 0.05, 0),
+        new THREE.Vector3(-0.12, 0.06, 0),
+        new THREE.Vector3(-0.03, 0.16, 0),
+        new THREE.Vector3(0, 0.18, 0),
+        new THREE.Vector3(0.03, 0.16, 0),
+        new THREE.Vector3(0.12, 0.06, 0),
+        new THREE.Vector3(0.60, 0.05, 0),
+      ],
+      false,
+      "catmullrom",
+      0.5
+    );
+  }, []);
+
+  return (
+    <mesh>
+      <tubeGeometry args={[curve, 64, thickness * 1.8, 16, false]} />
+      <meshStandardMaterial color={color} roughness={0.2} metalness={0.9} />
+    </mesh>
+  );
+};
+
 export default function App() {
   const radius = 0.08;
   const thickness = 0.004;
@@ -55,7 +81,7 @@ export default function App() {
   const planeHeight = radius * 1 + 0.01;
 
   return (
-    <div className="w-full h-10 bg-transparent flex items-end justify-center overflow-visible">
+    <div className="w-full h-20 bg-transparent flex items-end justify-center overflow-visible">
       <Canvas gl={{ antialias: true, alpha: true }}>
         <OrthographicCamera makeDefault position={[0, 0.02, 1]} zoom={200} />
 
@@ -67,6 +93,8 @@ export default function App() {
         <mesh position={[0, -(radius * 0.55), 0]} material={occluderMaterial}>
           <planeGeometry args={[planeWidth + 0.5, radius * 1.2]} />
         </mesh>
+
+        <HangerHook thickness={thickness} color="#333333" />
 
   
         {[...groups].reverse().map((posX, index) => {

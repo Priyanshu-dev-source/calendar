@@ -4,6 +4,7 @@
   padding: 16px 20px 12px;
   min-width: 200px;
   background-color: white;
+  height: 100%;
 }
 
 .header {
@@ -64,8 +65,8 @@
   background-image: repeating-linear-gradient(
     transparent,
     transparent 25px,
-    #e8e8e8 25px,
-    #e8e8e8 26px
+    #bbb 25px,
+    #bbb 26px
   );
   background-position: 0 -1px;
 }
