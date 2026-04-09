@@ -28,7 +28,8 @@
 .spiralBindingWrapper {
   position: relative;
   z-index: 20;
-  margin-bottom: -32px; /* pull the image up so rings overlap its top */
+  margin-bottom: -24px; /* pull the image up so rings overlap its top */
+  pointer-events: none;
 }
 
 .calendarBody {

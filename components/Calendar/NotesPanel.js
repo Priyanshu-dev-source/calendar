@@ -48,7 +48,7 @@ export default function NotesPanel({
   return (
     <div className={styles.panel} style={cssVars}>
       <div className={styles.header}>
-        <span className={styles.pencilIcon}>✏️</span>
+        {/* <span className={styles.pencilIcon}>✏️</span> */}
         <span className={styles.title}>Notes</span>
       </div>
 
@@ -70,11 +70,6 @@ export default function NotesPanel({
         className={styles.textarea}
         value={noteValue}
         onChange={handleChange}
-        placeholder={
-          startDate
-            ? 'Add notes for this date range...'
-            : 'Jot down notes for this month...'
-        }
         id="notes-textarea"
         aria-label="Notes"
       />
@@ -84,7 +79,7 @@ export default function NotesPanel({
       </div>
 
       {/* Monthly holidays */}
-      {monthHolidays.length > 0 && (
+      {/* {monthHolidays.length > 0 && (
         <>
           <div className={styles.divider} />
           <div className={styles.holidaysList}>
@@ -98,7 +93,7 @@ export default function NotesPanel({
             ))}
           </div>
         </>
-      )}
+      )} */}
     </div>
   );
 }

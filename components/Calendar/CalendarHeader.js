@@ -105,13 +105,13 @@ export default function CalendarHeader({
         </button>
       </div>
 
-      <button
+      {/* <button
         className={styles.todayBtn}
         onClick={onToday}
         id="btn-today"
       >
         Today
-      </button>
+      </button> */}
     </div>
   );
 }

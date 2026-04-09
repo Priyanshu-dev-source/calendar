@@ -46,9 +46,18 @@
 // }
 
 
-import React from "react";
+import React, { useMemo } from "react";
+import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { OrthographicCamera } from "@react-three/drei";
+
+// Invisible occluder material — writes to depth buffer only, renders no color.
+// This hides the back part of the rings (bottom arcs going behind the page)
+// while remaining completely invisible itself.
+const occluderMaterial = new THREE.MeshBasicMaterial({
+  colorWrite: false,
+  side: THREE.DoubleSide,
+});
 
 const CircularBinding = ({
   color = "#333333",
@@ -67,20 +76,6 @@ const CircularBinding = ({
 
 const PairGroup = ({ xOffset, radius, thickness, groupX, idx }) => (
   <group position={[-groupX, 0, 0]}>
-    {/* --- LEFT SQUARE HOLE --- */}
-    <mesh position={[-xOffset, -0.065, 0.001]}>
-      {/* Width is slightly wider than the ring, height is a small slot */}
-      <planeGeometry args={[0.012, 0.018]} />
-      {/* Dark gray color to simulate depth/shadow inside the hole */}
-      <meshBasicMaterial color="#666666" /> 
-    </mesh>
-
-    {/* --- RIGHT SQUARE HOLE --- */}
-    <mesh position={[xOffset, -0.065, 0.001]}>
-      <planeGeometry args={[0.012, 0.018]} />
-      <meshBasicMaterial color="#666666" />
-    </mesh>
-
     {/* The Rings */}
     <CircularBinding
       radius={radius}
@@ -112,18 +107,18 @@ export default function App() {
   const planeHeight = radius * 1 + 0.01;
 
   return (
-    <div className="w-full h-16 bg-transparent flex items-center justify-center overflow-hidden">
+    <div className="w-full h-10 bg-transparent flex items-end justify-center overflow-visible">
       <Canvas gl={{ antialias: true, alpha: true }}>
-        <OrthographicCamera makeDefault position={[0, 0, 1]} zoom={200} />
+        <OrthographicCamera makeDefault position={[0, 0.02, 1]} zoom={200} />
 
         <ambientLight intensity={1.2} />
         <pointLight position={[5, 5, 5]} intensity={2} />
         <pointLight position={[-5, -5, 5]} intensity={1} />
 
-        {/* --- THE WHITE RECTANGLE --- */}
-        <mesh position={[0, -0.03, 0]}>
-          <planeGeometry args={[planeWidth, planeHeight]} />
-          <meshBasicMaterial color="white" />
+        {/* Invisible occluder strip — hides the back arcs of the rings */}
+        {/* Positioned at z=0 so it sits between the front and back faces of the torus */}
+        <mesh position={[0, -(radius * 0.55), 0]} material={occluderMaterial}>
+          <planeGeometry args={[planeWidth + 0.5, radius * 1.2]} />
         </mesh>
 
         {/* The Rings mapped with center gap and tilt */}

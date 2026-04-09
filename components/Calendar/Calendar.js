@@ -81,7 +81,9 @@ export default function Calendar() {
   return (
     <div className={styles.calendarWrapper}>
       <div className={styles.calendar} id="calendar-main">
-        <SpiralBinding />
+        <div className={styles.spiralBindingWrapper}>
+          <SpiralBinding />
+        </div>
         
         <CalendarHeader
           month={currentMonth}
@@ -125,12 +127,12 @@ export default function Calendar() {
           </div>
         </div>
 
-        <div className={styles.keyboardHint}>
+        {/* <div className={styles.keyboardHint}>
           <span className={styles.kbd}>←</span>
           <span className={styles.kbd}>→</span> Navigate months
           &nbsp;·&nbsp;
           <span className={styles.kbd}>Esc</span> Clear selection
-        </div>
+        </div> */}
       </div>
 
       <button
